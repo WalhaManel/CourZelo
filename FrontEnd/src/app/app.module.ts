@@ -7,6 +7,8 @@ import { HomeComponent } from './home/home.component';
 import { CourseComponent } from './course/course.component';
 import { JoinnowComponent } from './joinnow/joinnow.component';
 import { AboutComponent } from './about/about.component';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,8 +19,11 @@ import { AboutComponent } from './about/about.component';
     AboutComponent
   ],
   imports: [
+    [RouterModule],
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
