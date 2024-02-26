@@ -1,21 +1,72 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AboutComponent } from './about/about.component';
-import { C1Component } from './c1/c1.component';
-import { C2Component } from './c2/c2.component';
-import { C3Component } from './c3/c3.component';
-import { CourseComponent } from './course/course.component';
-import { HomeComponent } from './home/home.component';
-import { JoinnowComponent } from './joinnow/joinnow.component';
+import { BlankComponent } from './layouts/blank/blank.component';
+import { FullComponent } from './layouts/full/full.component';
+import { FrontComponent } from './layouts/front/front.component';
+
+import { AppSideLoginComponent } from './pages/authentication/login/login.component';
+import { AppSideRegisterComponent } from './pages/authentication/register/register.component';
+import { LandingpageComponent } from './pages/landingpage/landingpage.component';
+import { NotfoundComponent } from './pages/notfound/notfound.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'course', component: CourseComponent },
-  { path: 'joinnow', component: JoinnowComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'c1', component: C1Component },
-  { path: 'c2', component: C2Component },
-  { path: 'c3', component: C3Component },
+  {
+    path: 'dashboard',
+    component: FullComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./pages/pages.module').then((m) => m.PagesModule),
+      },
+
+      {
+        path: 'clubs',
+        loadChildren: () =>
+          import('./manage-club/club.module').then((m) => m.ClubModule),
+      },
+    ],
+  },
+
+  //front-----------------------
+  {
+    path: '',
+    component: FrontComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+      },
+      {
+        path: 'home',
+        component: LandingpageComponent,
+      },
+
+      {
+        path: 'course',
+        loadChildren: () =>
+          import('./manage-club/club.module').then((m) => m.ClubModule),
+      },
+      {
+        path: '',
+        loadChildren: () =>
+          import('./pages/authentication/authentication.module').then(
+            (m) => m.AuthenticationModule
+          ),
+      },
+    ],
+  },
+  {
+    path: '**',
+    component: FrontComponent,
+    children: [
+      {
+        path: '',
+        component: NotfoundComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
