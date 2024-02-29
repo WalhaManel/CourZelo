@@ -31,6 +31,7 @@ import { PreLoaderComponent } from './layouts/front/pre-loader/pre-loader.compon
 import { BackToTopComponent } from './layouts/front/back-to-top/back-to-top.component';
 import { NavbarComponent } from './layouts/front/navbar/navbar.component';
 import { FooterComponent } from './layouts/front/footer/footer.component';
+import { BasketComponent } from './basket/basket.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { FooterComponent } from './layouts/front/footer/footer.component';
     NavbarComponent,
     FooterComponent,
     FrontComponent,
+    BasketComponent,
   ],
   imports: [
     BrowserModule,

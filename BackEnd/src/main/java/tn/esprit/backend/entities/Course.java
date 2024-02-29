@@ -1,17 +1,18 @@
 package tn.esprit.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
 @Entity
 public class Course {
     @Id
@@ -34,16 +35,16 @@ public class Course {
     private Date meetTime;
 
     private String meetUrl;
+    @JsonIgnore
     @OneToMany(mappedBy = "course")
     private List<ReservationCourse> reservationCourses;
-
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne()
     private Category category;
 
-    @OneToMany(mappedBy = "course")
-    private List<Lesson> lessons;
-
-    @ManyToOne
-    private Basket basket;
+    @ToString.Exclude
+    @JsonIgnore
+    @ManyToMany()
+    private Set<Basket> baskets;
 
 }

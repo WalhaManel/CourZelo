@@ -1,9 +1,12 @@
 package tn.esprit.backend.entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import tn.esprit.backend.entities.Ennumeration.Coupon;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -19,12 +22,23 @@ public class Basket {
     @Column
     private Long id;
 
-    @OneToMany(mappedBy = "basket",cascade = CascadeType.ALL)
-    private List<Course> courses;
+    @ManyToMany(mappedBy = "baskets")
+    private Set<Course> courses;
     @Column
-    private String coupon;
+    private Coupon coupon;
     @Column
     private Double Total ;
+
+    @Column
+    private Date date_add;
+
+    @Column
+    private String Status;
+
+    @JsonIgnore
     @OneToOne
     private Purchase purchase;
+
+    @ManyToOne()
+    private User user;
 }

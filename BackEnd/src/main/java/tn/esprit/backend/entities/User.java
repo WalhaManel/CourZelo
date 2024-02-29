@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 
 @Getter
@@ -63,4 +64,8 @@ public class User   {
 
     @OneToMany(mappedBy = "user")
     private List<ReservationCourse> reservationCourses;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private Set<Basket> baskets;
 }

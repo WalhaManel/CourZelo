@@ -8,6 +8,7 @@ import { AppSideLoginComponent } from './pages/authentication/login/login.compon
 import { AppSideRegisterComponent } from './pages/authentication/register/register.component';
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
+import { BasketComponent } from './basket/basket.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
           ),
       },
     ],
+  },
+  {
+    path: 'basket',
+    component: BasketComponent
   },
   {
     path: '**',
