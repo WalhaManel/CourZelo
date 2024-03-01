@@ -8,6 +8,16 @@ public class requestBody {
         private Basket basket;
         private List<Long> courses;
 
+        public Long getIdu() {
+                return idu;
+        }
+
+        public void setIdu(Long idu) {
+                this.idu = idu;
+        }
+
+        private Long  idu;
+
 
         public Basket getBasket() {
                 return basket;

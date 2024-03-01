@@ -6,13 +6,17 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IBasketSer {
-    Basket addToBasket(Basket b, List<Long> idcourses);
+    Basket addToBasket(Basket b, List<Long> idcourses,Long idu);
 
     Iterable<Basket> showAll();
 
      Optional<Basket> findOne(Long id);
-     Basket dropItem(Long idB, Long idC);
-     void EmptyBasket(long idB);
+     Basket dropItem(Basket b, Long idC);
+
+     void EmptyBasket(Basket b);
+
+
+
 
 
 

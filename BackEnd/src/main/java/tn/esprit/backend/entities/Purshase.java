@@ -1,19 +1,19 @@
 package tn.esprit.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
+@Builder
 @Entity
-
-public class Purchase {
+@Table(name = "Purshase")
+public class Purshase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -23,8 +23,16 @@ public class Purchase {
     private double remise;
     @Column
     private Date date_purchase;
-    @OneToOne(mappedBy = "purchase")
+
+    @Column
+    private String Status;
+
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
     private Basket basket;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Course course;
 
 
 }

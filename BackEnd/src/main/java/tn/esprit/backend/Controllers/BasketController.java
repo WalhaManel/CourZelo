@@ -31,7 +31,7 @@ public class BasketController {
 
     @PostMapping("addToBasket")
     public Basket addToBasket(@RequestBody requestBody RQ ){
-        return BasketS.addToBasket(RQ.getBasket(),RQ.getCourses());
+        return BasketS.addToBasket(RQ.getBasket(),RQ.getCourses(),RQ.getIdu());
     }
     @GetMapping("showAll")
     public Iterable<Basket> showAll(){
@@ -51,13 +51,13 @@ public class BasketController {
 
     }
     @DeleteMapping("dropItem")
-    public Basket dropItem(@RequestParam("idb") Long idB,@RequestParam("idc") Long idC){
-        return BasketS.dropItem(idB,idC);
+    public Basket dropItem(@RequestBody Basket b,@RequestParam("idc") Long idC){
+        return BasketS.dropItem(b,idC);
     }
 
     @DeleteMapping("emptyBasket")
-    public void EmptyBasket(@RequestParam("idb") long idB){
-        BasketS.EmptyBasket(idB);
+    public void EmptyBasket(@RequestBody Basket b){
+        BasketS.EmptyBasket(b);
     }
     @GetMapping("showBasket")
     public Optional<Basket> showBasket(@RequestParam("idU") Long idU){

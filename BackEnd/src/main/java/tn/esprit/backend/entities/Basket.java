@@ -5,7 +5,6 @@ import lombok.*;
 import tn.esprit.backend.entities.Ennumeration.Coupon;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -22,8 +21,7 @@ public class Basket {
     @Column
     private Long id;
 
-    @ManyToMany(mappedBy = "baskets")
-    private Set<Course> courses;
+
     @Column
     private Coupon coupon;
     @Column
@@ -32,13 +30,9 @@ public class Basket {
     @Column
     private Date date_add;
 
-    @Column
-    private String Status;
+    @OneToMany(mappedBy = "basket")
+    private Set<Purshase> purchases;
 
-    @JsonIgnore
-    @OneToOne
-    private Purchase purchase;
-
-    @ManyToOne()
+    @OneToOne(mappedBy = "basket")
     private User user;
 }

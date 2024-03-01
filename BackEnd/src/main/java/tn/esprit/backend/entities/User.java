@@ -66,6 +66,6 @@ public class User   {
     private List<ReservationCourse> reservationCourses;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private Set<Basket> baskets;
+    @OneToOne
+    private Basket basket;
 }

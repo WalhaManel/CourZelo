@@ -38,13 +38,18 @@ public class Course {
     @JsonIgnore
     @OneToMany(mappedBy = "course")
     private List<ReservationCourse> reservationCourses;
+
+
     @JsonIgnore
     @ManyToOne()
     private Category category;
 
+
     @ToString.Exclude
     @JsonIgnore
-    @ManyToMany()
-    private Set<Basket> baskets;
+    @OneToMany(mappedBy = "course",cascade = CascadeType.ALL)
+    private Set<Purshase> purshases;
+
+
 
 }
