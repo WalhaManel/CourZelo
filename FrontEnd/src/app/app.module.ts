@@ -25,13 +25,11 @@ import { HeaderComponent } from './layouts/full/header/header.component';
 import { BrandingComponent } from './layouts/full/sidebar/branding.component';
 import { AppNavItemComponent } from './layouts/full/sidebar/nav-item/nav-item.component';
 import { UniversityModule } from './manage-university/university.module';
-
 import { ClubModule } from './manage-club/club.module';
 import { PreLoaderComponent } from './layouts/front/pre-loader/pre-loader.component';
 import { BackToTopComponent } from './layouts/front/back-to-top/back-to-top.component';
 import { NavbarComponent } from './layouts/front/navbar/navbar.component';
 import { FooterComponent } from './layouts/front/footer/footer.component';
-import { BasketComponent } from './basket/basket.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +45,6 @@ import { BasketComponent } from './basket/basket.component';
     NavbarComponent,
     FooterComponent,
     FrontComponent,
-    BasketComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Club } from '../models/club';
+import { Club } from '../models/course';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -51,5 +51,11 @@ export class ClubService {
       this.baseUrl + '/dashboard/clubs/updateClub/' + data.university,
       data
     );
+  }
+
+  shareFb(id: any): Observable<string> {
+    const shareFbEndpoint = `${this.baseUrl}/shareFb/${id}`;
+
+    return this.http.post<string>(shareFbEndpoint, null);
   }
 }

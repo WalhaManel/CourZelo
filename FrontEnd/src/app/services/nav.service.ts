@@ -1,11 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Event, NavigationEnd, Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class NavService {
-    
 
     public currentUrl = new BehaviorSubject<any>(undefined);
 
@@ -16,7 +14,6 @@ export class NavService {
             }
         });
     }
-
 
 
 }

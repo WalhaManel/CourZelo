@@ -8,8 +8,9 @@ describe('BackToTopComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BackToTopComponent],
-    }).compileComponents();
+      declarations: [ BackToTopComponent ]
+    })
+    .compileComponents();
 
     fixture = TestBed.createComponent(BackToTopComponent);
     component = fixture.componentInstance;

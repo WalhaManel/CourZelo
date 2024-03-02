@@ -8,19 +8,29 @@ import { AppSideLoginComponent } from './pages/authentication/login/login.compon
 import { AppSideRegisterComponent } from './pages/authentication/register/register.component';
 import { LandingpageComponent } from './pages/landingpage/landingpage.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
-import { BasketComponent } from './basket/basket.component';
 
 const routes: Routes = [
   {
     path: 'dashboard',
     component: FullComponent,
     children: [
+      // {
+      //   path: '',
+      //   redirectTo: 'dashboard/home',
+      //   pathMatch: 'full',
+      // },
       {
         path: '',
         loadChildren: () =>
           import('./pages/pages.module').then((m) => m.PagesModule),
       },
-
+      {
+        path: 'universities',
+        loadChildren: () =>
+          import('./manage-university/university.module').then(
+            (m) => m.UniversityModule
+          ),
+      },
       {
         path: 'clubs',
         loadChildren: () =>
@@ -43,9 +53,16 @@ const routes: Routes = [
         path: 'home',
         component: LandingpageComponent,
       },
-
       {
         path: 'course',
+        loadChildren: () =>
+          import('./manage-university/university.module').then(
+            (m) => m.UniversityModule
+          ),
+      },
+
+      {
+        path: 'events',
         loadChildren: () =>
           import('./manage-club/club.module').then((m) => m.ClubModule),
       },
@@ -57,10 +74,6 @@ const routes: Routes = [
           ),
       },
     ],
-  },
-  {
-    path: 'basket',
-    component: BasketComponent
   },
   {
     path: '**',

@@ -1844,6 +1844,7 @@ body {
   -ms-flex-align: center;
   align-items: center;
   padding: 2rem 0;
+  width: 100% !important;
 }
 
 .dash__side-bar__logo {
