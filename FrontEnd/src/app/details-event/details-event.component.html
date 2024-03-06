@@ -1,0 +1,35 @@
+<h2>Employee Details</h2> 
+
+<hr/>
+<div *ngIf="event">
+  <div>
+    <label><b>eventName: </b></label> {{event.eventName}}
+  </div>
+  <div>
+    <label><b>eventDate: </b></label> {{event.eventDate}}
+  </div>
+  <div>
+    <label><b>eventDescription: </b></label> {{ event.eventDescription}}
+  </div>
+  <div>
+    <label><b>price: </b></label> {{event.price}}
+  </div>
+  <div>
+    <label><b>availablePlaces: </b></label> {{event.availablePlaces}}
+  </div>
+  <div>
+    <label><b>eventPlaces: </b></label> {{event.eventPlaces}}
+  </div>
+  <div>
+    <label><b>latitude: </b></label> {{event.latitude}}
+  </div>
+  <div>
+    <label><b>longitude: </b></label> {{event.longitude}}
+  </div>  
+</div>
+
+<br>
+<br>
+<button (click)="BacktoAdminDashboard()" class="btn btn-primary">Back to Event List</button><br>
+
+

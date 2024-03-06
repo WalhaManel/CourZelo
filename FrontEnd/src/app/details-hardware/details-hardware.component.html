@@ -1,0 +1,18 @@
+<h2>Hardware Details</h2>
+<hr/>
+<div *ngIf="hardware">
+ 
+  <div>
+    <label><b>Hardware Name: </b></label> {{hardware.hardwareName}}
+  </div>
+  <div>
+    <label><b>Status: </b></label> {{ hardware.status}}
+  </div>
+  <div>
+    <label><b>Quantity: </b></label> {{hardware.quantity}}
+  </div>
+</div>
+
+<br>
+<br>
+<button (click)="BacktoAdminDashboard()" class="btn btn-primary">Back to Dashboard</button><br>

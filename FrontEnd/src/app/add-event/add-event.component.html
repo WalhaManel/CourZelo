@@ -1,0 +1,50 @@
+<h3>Create Event</h3>
+<div [hidden]="submitted" style="width: 400px; ">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">event Name</label>
+      <input type="text" class="form-control" id="firstName" required [(ngModel)]="event.eventName" name="eventName">
+      
+    </div>
+    <div class="form-group">
+        <label for="name">EventDate</label>
+        <input type="date" class="form-control" id="firstName" required [(ngModel)]="event.eventDate" name="eventDate">
+      </div>
+      <div class="form-group">
+        <label for="name">EventDescription</label>
+        <input type="text" class="form-control" id="eventDescription" required [(ngModel)]="event.eventDescription" name="eventDescription">
+      </div>
+      <div class="form-group">
+        <label for="name">Price</label>
+        <input type="number" class="form-control" id="eventprice"required [(ngModel)]="event.price" name="Price">
+      </div>
+      <div class="form-group">
+        <label for="name">AvailablePlaces</label>
+        <input type="number" class="form-control" id="availablePlaces" required [(ngModel)]="event.availablePlaces" name="AvailablePlaces">
+      </div>
+      <div class="form-group">
+        <label for="name">EventPlaces</label>
+        <input type="text" class="form-control" id="eventPlaces" required [(ngModel)]="event.eventPlaces" name="EventPlaces">
+      </div>
+
+    <div class="form-group">
+      <label for="name">Latitude</label>
+      <input type="text" class="form-control" id="lastName" required [(ngModel)]="event.latitude" name="Latitude">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Longitude</label>
+      <input type="text" class="form-control" id="emailId" required [(ngModel)]="event.longitude" name="Longitude">
+    </div>
+    <div class="form-group">
+        <label for="hardwares">Hardwares</label>
+        <select multiple class="form-control" id="hardwares" required [(ngModel)]="event.hardwares" name="hardwares">
+          <option *ngFor="let hardware of hardwares" [ngValue]="hardware">{{ hardware.hardwareName }}</option>
+        </select>
+      </div>
+    <button   type="submit" class="btn btn-success">Submit</button>
+  </form>
+  <button  (click)="BacktoAdminDashboard()"  class="btn btn-success">Back</button>
+</div>
+
+

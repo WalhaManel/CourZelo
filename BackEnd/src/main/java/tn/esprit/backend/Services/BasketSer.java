@@ -8,6 +8,7 @@ import tn.esprit.backend.Repositories.BasketRep;
 import tn.esprit.backend.Repositories.CousreRepository;
 import tn.esprit.backend.entities.Basket;
 import tn.esprit.backend.entities.Course;
+import tn.esprit.backend.entities.User;
 
 import java.util.*;
 import java.util.logging.Logger;
@@ -40,7 +41,7 @@ public class BasketSer implements IBasketSer {
     public Optional<Basket> findOne(Long id)
     { return BasketR.findById(id);}
 
-    public Optional<Basket> showBasket(Long idU)
+    public Optional<Basket> showBasket(User idU)
     { return BasketR.findByUser(idU);}
 
     public Basket dropItem(Long idB, Long idC){

@@ -23,6 +23,7 @@
     "@lottiefiles/lottie-player": "^2.0.3",
     "angular-tabler-icons": "^2.40.0",
     "apexcharts": "^3.35.3",
+    "cors": "^2.8.5",
     "lottie-web": "^5.12.2",
     "ng-apexcharts": "1.7.1",
     "ngx-lottie": "^11.0.1",

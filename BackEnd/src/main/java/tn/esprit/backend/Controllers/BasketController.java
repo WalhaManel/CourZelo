@@ -11,6 +11,7 @@ import tn.esprit.backend.Services.BasketSer;
 import tn.esprit.backend.Services.CourseService;
 import tn.esprit.backend.entities.Basket;
 import tn.esprit.backend.entities.Course;
+import tn.esprit.backend.entities.User;
 import tn.esprit.backend.entities.classe.requestBody;
 import java.util.List;
 import java.util.Optional;
@@ -60,7 +61,7 @@ public class BasketController {
         BasketS.EmptyBasket(idB);
     }
     @GetMapping("showBasket")
-    public Optional<Basket> showBasket(@RequestParam("idU") Long idU){
+    public Optional<Basket> showBasket(@RequestParam("idU") User idU){
         return BasketS.showBasket(idU);
 
     }

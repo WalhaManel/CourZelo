@@ -2,46 +2,35 @@ package tn.esprit.backend.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.Date;
-import java.util.List;
+import lombok.experimental.FieldDefaults;
 
+import java.util.Date;
+import java.util.Set;
+
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-
-@Entity
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Event {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "event_id")
-    private Long eventId;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    Long EventID;
+    String EventName;
+    String EventDescription;
+    Date EventDate;
+    Float Price;
+    Long AvailablePlaces;
+    Long EventPlaces;
+    String Latitude;
+    String Longitude;
 
-    @Column(name = "event_image")
-    private String eventImage;
+    // Image data as byte array
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    byte[] imageData;
 
-    @Column(name = "event_name")
-    private String eventName;
-
-    @Column(name = "event_description")
-    private String eventDescription;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "event_date")
-    private Date eventDate;
-
-    private float price;
-
-    @Column(name = "available_places")
-    private long availablePlaces;
-
-    @Column(name = "event_place")
-    private String eventPlace;
-
-    private float latitude;
-
-    private float longitude;
-
-    // Constructors, getters, and setters
+    @ManyToMany(cascade = CascadeType.ALL)
+    Set<Hardware> hardwares;
 }

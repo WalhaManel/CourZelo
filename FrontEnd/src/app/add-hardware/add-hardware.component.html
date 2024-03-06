@@ -1,0 +1,22 @@
+<h3>Create Hardware</h3>
+<div [hidden]="submitted" style="width: 400px;">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="hardwareName">Hardware Name</label>
+      <input type="text" class="form-control" id="hardwareName" required [(ngModel)]="hardware.hardwareName" name="hardwareName">
+    </div>
+    <div class="form-group">
+      <label for="status">Status</label>
+      <select class="form-control" id="status" required [(ngModel)]="hardware.status" name="status">
+        <option *ngFor="let status of hardwareStatusOptions " [value]="status">{{ status }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <input type="number" class="form-control" id="quantity" required [(ngModel)]="hardware.quantity" name="quantity">
+    </div>
+    <button  type="submit"  class="btn btn-success">Submit</button>
+    
+  </form>
+</div>
+<button type="submit" (click)="BacktoAdminDashboard()" class="btn btn-success">back</button> 

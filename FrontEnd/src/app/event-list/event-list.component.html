@@ -1,0 +1,35 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2>Event List</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>EventName</th>
+            <th>EventDate</th>
+            <th>EventDescription</th>
+            <th>Price</th>
+            <th>AvailablePlaces</th>
+            <th>EventPlaces</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let event of events | async">
+            <td>{{ event.eventName }}</td>
+            <td>{{ event.eventDate }}</td>
+            <td>{{ event.eventDescription }}</td>
+            <td>{{ event.price }}</td>
+            <td>{{ event.availablePlaces }}</td>
+            <td>{{ event.eventPlaces }}</td>
+            <td>{{ event.latitude }}</td>
+            <td>{{ event.longitude }}</td>
+            <td> <button (click)="eventDetails(event.eventID)" class="btn btn-info" style="margin-left: 10px">Details</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
