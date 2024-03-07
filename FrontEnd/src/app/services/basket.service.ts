@@ -10,9 +10,9 @@ export class BasketService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllProducts(): Observable<any> {
+  ShowBasket(varValue: any): Observable<any> {
     
-    return this.httpClient .get<any>('http://localhost:8080/pi/basket/showAll',{
+    return this.httpClient .get<any>(`http://localhost:8080/pi/basket/showBasket?idU=${varValue}`,{
       headers:new HttpHeaders(
         {
           // 'Authorization' : `Bearer ${localStorage.getItem('token')}`
@@ -20,5 +20,51 @@ export class BasketService {
       )
     });
   }
+
+  deleteItemFromBasket(idc: any,idb :any): Observable<any> {
+    
+    return this.httpClient.delete<any>(`http://localhost:8080/pi/basket/dropItem?idc=${idc}&idb=${idb}`,{
+      headers:new HttpHeaders(
+        {
+          'Content-Type': 'application/json'
+        }
+      )
+    });
+  }
+
+  dropAll(idb :any): Observable<any> {
+    
+    return this.httpClient.delete<any>(`http://localhost:8080/pi/basket/emptyBasket?idb=${idb}`,{
+      headers:new HttpHeaders(
+        {
+          'Content-Type': 'application/json'
+        }
+      )
+    });
+  }
+
+  confirmPurcheses(idb :any): Observable<any> {
+    
+    return this.httpClient.post<any>(`http://localhost:8080/pi/purchase/confirmPurchases?idb=${idb}`,{
+      headers:new HttpHeaders(
+        {
+          'Content-Type': 'application/json'
+        }
+      )
+    });
+  }
+
+  ApplyCode(code : any,idb : any): Observable<any> {
+    
+    return this.httpClient.get<any>(`http://localhost:8080/pi/basket/ApplyCode?code=${code}&idb=${idb}`,{
+      headers:new HttpHeaders(
+        {
+          'Content-Type': 'application/json'
+        }
+      )
+    });
+  }
   
+
+
 }

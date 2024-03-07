@@ -32,6 +32,9 @@ import { BackToTopComponent } from './layouts/front/back-to-top/back-to-top.comp
 import { NavbarComponent } from './layouts/front/navbar/navbar.component';
 import { FooterComponent } from './layouts/front/footer/footer.component';
 import { BasketComponent } from './basket/basket.component';
+import { AddBasketComponent } from './add-basket/add-basket.component';
+import { ListPurchasesComponent } from './list-purchases/list-purchases.component';
+import { ShowPurchasesComponent } from './show-purchases/show-purchases.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,9 @@ import { BasketComponent } from './basket/basket.component';
     FooterComponent,
     FrontComponent,
     BasketComponent,
+    AddBasketComponent,
+    ListPurchasesComponent,
+    ShowPurchasesComponent,
   ],
   imports: [
     BrowserModule,

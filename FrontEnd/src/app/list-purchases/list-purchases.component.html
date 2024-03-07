@@ -1,0 +1,74 @@
+<style>
+    .gradient-custom {
+        /* fallback for old browsers */
+        background: #6a11cb;
+
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+    }
+</style>
+<div class="container py-5">
+    <div class="card mb-4">
+        <div class="card-header py-3">
+            <h5 class="mb-0">List of Purshases</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-hover " >
+                <thead>
+                    <th>
+                       Id
+                    </th>
+
+                    <th>
+                        Promo Code
+                    </th>
+                    <th>
+                        Add Date
+                    </th>
+                    
+
+                    <th>
+                        Total
+                    </th>
+
+                    <th>
+                        Purchase Date
+                    </th>
+                    <th>
+                    </th>
+                    <th>                    </th>
+
+
+
+                </thead>
+                <tr *ngFor="let item of  listPurchases">
+                    <td>
+                        {{item.id}}
+                    </td>
+
+                    <td>
+                        {{item.coupon}}
+                    </td>
+                    <td>
+                        {{item.date_add}}
+                    </td>
+                    <td>
+                        {{item.total}}
+                    </td>
+
+                    <td>
+                        <a routerLink="/purchases" routerLinkActive="router-link-active" style="color: blue;">View Client</a>
+                    </td>
+                    <td>
+                        <a routerLink="/showDetails/{{item.id}}" routerLinkActive="router-link-active" style="color: blue;">View
+                            Purchases</a>
+                    </td>
+
+                </tr>
+            </table>
+
+        </div>
+    </div>
