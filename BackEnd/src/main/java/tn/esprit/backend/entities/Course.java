@@ -35,6 +35,9 @@ public class Course {
     private Date meetTime;
 
     private String meetUrl;
+
+    private Double price;
+
     @JsonIgnore
     @OneToMany(mappedBy = "course")
     private List<ReservationCourse> reservationCourses;

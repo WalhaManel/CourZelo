@@ -28,10 +28,10 @@ public class Purshase {
     private String Status;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     private Basket basket;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     private Course course;
 
 

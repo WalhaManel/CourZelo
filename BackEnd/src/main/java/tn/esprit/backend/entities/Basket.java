@@ -12,7 +12,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
+@Builder
 @Entity
 public class Basket {
 
@@ -33,6 +33,6 @@ public class Basket {
     @OneToMany(mappedBy = "basket")
     private Set<Purshase> purchases;
 
-    @OneToOne(mappedBy = "basket")
+    @OneToOne()
     private User user;
 }

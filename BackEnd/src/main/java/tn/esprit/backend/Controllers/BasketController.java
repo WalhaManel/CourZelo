@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,6 @@ import tn.esprit.backend.Services.BasketSer;
 import tn.esprit.backend.Services.CourseService;
 import tn.esprit.backend.entities.Basket;
 import tn.esprit.backend.entities.Course;
-import tn.esprit.backend.entities.classe.requestBody;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,10 +29,16 @@ public class BasketController {
     @Autowired
     CourseService courseService;
 
+//    @PostMapping("confirmPurshases")
+//    public Basket addToBasket(@RequestParam('idb') Long idb ){
+//        return BasketS.confirmPurshases(idb);
+//    }
     @PostMapping("addToBasket")
-    public Basket addToBasket(@RequestBody requestBody RQ ){
-        return BasketS.addToBasket(RQ.getBasket(),RQ.getCourses(),RQ.getIdu());
+    public Basket addToBasket(@RequestParam("idc") Long idc, @RequestParam("idu") Long idu ){
+        return BasketS.addToBasket(idc,idu);
     }
+
+
     @GetMapping("showAll")
     public Iterable<Basket> showAll(){
         return BasketS.showAll();
@@ -51,17 +57,22 @@ public class BasketController {
 
     }
     @DeleteMapping("dropItem")
-    public Basket dropItem(@RequestBody Basket b,@RequestParam("idc") Long idC){
+    public Basket dropItem(@RequestParam("idb") Long b,@RequestParam("idc") Long idC){
         return BasketS.dropItem(b,idC);
     }
 
     @DeleteMapping("emptyBasket")
-    public void EmptyBasket(@RequestBody Basket b){
-        BasketS.EmptyBasket(b);
+    public String EmptyBasket(@RequestParam("idb") Long idb){
+       return BasketS.EmptyBasket(idb);
     }
     @GetMapping("showBasket")
-    public Optional<Basket> showBasket(@RequestParam("idU") Long idU){
+    public Basket showBasket(@RequestParam("idU") Long idU){
         return BasketS.showBasket(idU);
 
+    }
+
+    @GetMapping("ApplyCode")
+    public String ApplyCode(@RequestParam("code") String code, @RequestParam("idb") Long idb){
+        return BasketS.ApplyCode(code,idb);
     }
 }

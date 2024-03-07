@@ -66,6 +66,6 @@ public class User   {
     private List<ReservationCourse> reservationCourses;
 
     @JsonIgnore
-    @OneToOne
+    @OneToOne(mappedBy = "user")
     private Basket basket;
 }
