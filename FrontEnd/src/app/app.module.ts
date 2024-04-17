@@ -35,9 +35,12 @@ import { BasketComponent } from './basket/basket.component';
 import { AddBasketComponent } from './add-basket/add-basket.component';
 import { ListPurchasesComponent } from './list-purchases/list-purchases.component';
 import { ShowPurchasesComponent } from './show-purchases/show-purchases.component';
+import { PopupComponent } from './popup/popup.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
+    
     AppComponent,
     FullComponent,
     BlankComponent,
@@ -54,8 +57,10 @@ import { ShowPurchasesComponent } from './show-purchases/show-purchases.componen
     AddBasketComponent,
     ListPurchasesComponent,
     ShowPurchasesComponent,
+    PopupComponent,
   ],
   imports: [
+    MatDialogModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

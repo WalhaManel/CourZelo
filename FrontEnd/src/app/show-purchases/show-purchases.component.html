@@ -19,6 +19,7 @@
             <h5 class="mb-0"> Basket Details </h5>
         </div>
         <div class="card-body">
+            <div class="container" id="content" #content>
             <table class="table table-striped table-hover " >
                 <thead>
                     <th>
@@ -73,5 +74,8 @@
 
                 </tr>
             </table>
+            <input type="button" value="Download PDF" class="btn btn-success" (click)="SavePDF()"> 
+
         </div>
     </div>
+</div>

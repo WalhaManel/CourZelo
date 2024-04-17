@@ -16,8 +16,8 @@
             <div class="col-md-8">
                 <div class="card mb-4">
                     <div class="card-header py-3">
-                        <h5 class="mb-0">Cart - {{backendData.purchases.length}} items</h5>
-
+                        <h5 *ngIf="backendData.purchases.length >0 " class="mb-0">Cart - {{backendData.purchases.length}} items</h5>
+                        <h5 *ngIf="backendData.purchases.length ==0 "> NO Item in your cart </h5>
                     </div>
                     <div class="card-body" *ngFor="let item of  backendData.purchases">
                         <!-- Single item -->
@@ -55,10 +55,7 @@
                         </div>
                         <!-- Single item -->
 
-                        <hr class="my-4" />
-                        <button type="button" class="btn btn-danger btn-lg btn-block" style="text-align: center;" (click)="dropAll(backendData.id)">
-                            Remove All
-                          </button>
+                        
 
 
 
@@ -68,22 +65,22 @@
                         <!-- Single item -->
                     </div>
                 </div>
-
+                <hr class="my-4" />
+                <button *ngIf="backendData.purchases.length >0 " type="button" class="btn btn-danger btn-lg btn-block" style="text-align: center;" (click)="dropAll(backendData.id)">
+                    Remove All
+                  </button>
                 <div class="card mb-4 mb-lg-0">
                     <div class="card-body">
                         <p><strong>We accept</strong></p>
                         <img class="me-2" width="45px"
                             src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
                             alt="Visa" />
-                        <img class="me-2" width="45px"
-                            src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
-                            alt="American Express" />
+                        
                         <img class="me-2" width="45px"
                             src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
                             alt="Mastercard" />
                         <img class="me-2" width="45px"
-                            src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.webp"
-                            alt="PayPal acceptance mark" />
+                            [src]="imageUrl"          alt="PayPal acceptance mark" />
                     </div>
                 </div>
             </div>
@@ -124,9 +121,11 @@
                             </li>
                         </ul>
 
-                        <button type="button" class="btn btn-primary btn-lg btn-block" (click)="confirmPurcheses(backendData.id)">
+                        <button type="button"  class="btn btn-primary" (click)="openPopup()" [disabled]="backendData?.purchases?.length == 0"  name="chekout" >
+    
                             Go to checkout
                         </button>
+                        
                     </div>
                 </div>
             </div>

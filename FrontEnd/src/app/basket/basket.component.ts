@@ -1,20 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupComponent } from 'app/popup/popup.component';
+import { PopupService } from 'app/popup/popup.service';
 import { BasketService } from 'app/services/basket.service';
 
 @Component({
   selector: 'app-basket',
   templateUrl: './basket.component.html',
-  styleUrls: ['./basket.component.scss']
+  styleUrls: ['./basket.component.scss'],
 })
 
 export class BasketComponent implements OnInit {
   backendData: any;
   couponValue: string = '';
-
   msg : any = '';
-  placeholder : String = 'Enter promotional code';
-  constructor(private BasketService: BasketService) { }
+  id : any;
+  imageUrl: string = '/assets/images/cart1.jpg';
 
+  placeholder : String = 'Enter promotional code';
+  constructor(private BasketService: BasketService,private dialog: MatDialog) { }
+  openPopup() {
+    this.id = this.backendData.id;
+    this.dialog.open(PopupComponent, {
+      data: { id: this.id } // Pass data to the PopupComponent
+    });
+  }
   ngOnInit(): void {
     this.BasketService.ShowBasket(1).subscribe(data => {
       this.backendData = data;

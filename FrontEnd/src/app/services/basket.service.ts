@@ -21,6 +21,18 @@ export class BasketService {
     });
   }
 
+  Search(varValue: any,date: any): Observable<any> {
+    
+    return this.httpClient .get<any>(`http://localhost:8080/pi/basket/Search?key=${varValue}&date=${date}`,{
+      headers:new HttpHeaders(
+        {
+          // 'Authorization' : `Bearer ${localStorage.getItem('token')}`
+        }
+      )
+    });
+  }
+  
+
   deleteItemFromBasket(idc: any,idb :any): Observable<any> {
     
     return this.httpClient.delete<any>(`http://localhost:8080/pi/basket/dropItem?idc=${idc}&idb=${idb}`,{
