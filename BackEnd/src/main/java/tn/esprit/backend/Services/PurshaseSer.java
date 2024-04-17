@@ -11,6 +11,9 @@ import tn.esprit.backend.entities.Purshase;
 public class PurshaseSer implements IPurshasSer{
     @Autowired
     private PurshaseRep purshaseRep;
+
+    @Autowired
+    private BasketSer basketSer;
     public Iterable<Purshase> getPurchases(Long id)
     { return purshaseRep.findByBasketId(id);}
 
@@ -22,6 +25,8 @@ public class PurshaseSer implements IPurshasSer{
             p.setStatus("Confirmed");
             purshaseRep.save(p);
         }
+        basketSer.EmptyBasket(id);
+
 
     }
 

@@ -33,7 +33,7 @@ export class ShowPurchasesComponent implements OnInit{
     doc.text('-----------------------------------------', 15, 15);
     doc.text('Date: ' + new Date().toLocaleDateString(), 15, 20);
     doc.text('-----------------------------------------', 15, 30);
-    doc.text('', 15, 35;
+    doc.text('', 15, 35);
     const data = [];
     let total: any = 0;
 

@@ -12,6 +12,8 @@ import tn.esprit.backend.Services.BasketSer;
 import tn.esprit.backend.Services.CourseService;
 import tn.esprit.backend.entities.Basket;
 import tn.esprit.backend.entities.Course;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +44,12 @@ public class BasketController {
     @GetMapping("showAll")
     public Iterable<Basket> showAll(){
         return BasketS.showAll();
+
+    }
+
+    @GetMapping("Search")
+    public Iterable<Basket> Search(@RequestParam("key") String key,@RequestParam("date") String date){
+        return BasketS.SerachResult(key,date);
 
     }
 

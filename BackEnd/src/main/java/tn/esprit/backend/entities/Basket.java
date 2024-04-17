@@ -2,7 +2,6 @@ package tn.esprit.backend.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import tn.esprit.backend.entities.Ennumeration.Coupon;
 
 import java.util.Date;
 import java.util.Set;
@@ -23,7 +22,7 @@ public class Basket {
 
 
     @Column
-    private Coupon coupon;
+    private String promoCode;
     @Column
     private Double Total ;
 

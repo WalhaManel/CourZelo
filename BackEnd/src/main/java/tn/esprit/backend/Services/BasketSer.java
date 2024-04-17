@@ -3,16 +3,12 @@ package tn.esprit.backend.Services;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.backend.Repositories.BasketRep;
-import tn.esprit.backend.Repositories.CousreRepository;
-import tn.esprit.backend.Repositories.PurshaseRep;
-import tn.esprit.backend.Repositories.UserRep;
-import tn.esprit.backend.entities.Basket;
-import tn.esprit.backend.entities.Course;
-import tn.esprit.backend.entities.Ennumeration.Coupon;
-import tn.esprit.backend.entities.Purshase;
-import tn.esprit.backend.entities.User;
+import tn.esprit.backend.Repositories.*;
+import tn.esprit.backend.entities.*;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 @Service
@@ -27,6 +23,8 @@ public class BasketSer implements IBasketSer {
 
     @Autowired
     private UserRep userRep;
+    @Autowired
+    private PromoCodeRepository promoCodeRepository;
 
     public Basket addToBasket(Long idcourse, Long idu) {
         Basket b = BasketR.findByUserUserId(idu);
@@ -60,6 +58,12 @@ public class BasketSer implements IBasketSer {
 
     public Iterable<Basket> showAll()
     { return BasketR.findAll();}
+
+    public Iterable<Basket> SerachResult(String key,String date)
+    {
+        Date ts = java.sql.Date.valueOf(date);
+
+        return BasketR.findByEmailOrDateAddOrPromoCode(key,ts,key);}
 
     public Optional<Basket> findOne(Long id)
     { return BasketR.findById(id);}
@@ -102,26 +106,29 @@ public class BasketSer implements IBasketSer {
                 purshaseRep.delete(p);
 
             }
-            b.setTotal((double) 0);
-            BasketR.save(b);
+
         }
+        b.setTotal((double) 0);
+        BasketR.save(b);
         return "{\"msg\":\"affected\"}";
 
     }
 
     public String ApplyCode(String code, Long idb){
         Basket b = BasketR.findById(idb).get();
-        Coupon[] coupons = Coupon.values();
+        Set<PromoCode> coupons = (Set<PromoCode>) promoCodeRepository.findAll();
         boolean isEnumValue = false;
+        int discount = 0;
 
-        for (Coupon c : coupons) {
-            if (c.name().equals(code)) {
+        for (PromoCode c : coupons) {
+            if (c.getPromoCode().equals(code)) {
                 isEnumValue = true;
+                discount = c.getDiscount();
                 break;
             }
         }
         if (isEnumValue){
-            b.setTotal(b.getTotal()-b.getTotal()*0.1);
+            b.setTotal(b.getTotal()- (b.getTotal() * discount / 100));
             BasketR.save(b);
             return "{\"msg\":\"applyed\"}";
         }else {
