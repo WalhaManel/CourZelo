@@ -1,8 +1,16 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { AddUniversityDialogDashComponent } from '../add-university-dialog-dash/add-university-dialog-dash.component';
+import { ClubService } from '../../manage-club/services/club.service';
+import { Club } from '../../manage-club/models/course';
+
+import { Event } from '../../manage-club/models/event';
+
+import { AddEventDialogDashComponent } from '../../manage-club/manage-events/add-event-dialog-dash/add-event-dialog-dash.component';
+import { EventService } from '../../manage-club/services/event.service';
+import { UpdateEventDialogDashComponent } from '../../manage-club/manage-events/update-event-dialog-dash/update-event-dialog-dash.component';
 
 @Component({
   selector: 'app-university-list-dash',
@@ -10,129 +18,115 @@ import { AddUniversityDialogDashComponent } from '../add-university-dialog-dash/
   styleUrls: ['./university-list-dash.component.scss'],
 })
 export class UniversityListDashComponent {
-  ELEMENT_DATA: any = [
-    {
-      id: 1,
-      imagePath: 'assets/images/profile/user-1.jpg',
-      uname: 'Sunil Joshi',
-      email: 'nabil@gmail.com',
-      tel: '41156289',
-      role: 'admin',
-      state: 'active',
-    },
-    {
-      id: 2,
-      imagePath: 'assets/images/profile/user-2.jpg',
-      uname: 'Andrew McDownland',
-      email: 'salah@gmail.com',
-      tel: '56432861',
-      role: 'user',
-      state: 'unactive',
-    },
-    {
-      id: 3,
-      imagePath: 'assets/images/profile/user-3.jpg',
-      uname: 'Christopher Jamil',
-      email: 'foulen@gmail.com',
-      tel: '98432158',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-    {
-      id: 4,
-      imagePath: 'assets/images/profile/user-4.jpg',
-      uname: 'Nirav Joshi',
-      email: 'Nirav@gmail.com',
-      tel: '91887328',
-      role: 'user',
-      state: 'active',
-    },
-  ];
-
-  constructor(private addUserDialog: MatDialog) {}
-
   dataSource: any;
-  displayedColumns: string[] = ['name', 'email', 'tel', 'state', 'action'];
+  displayedColumns: string[] = [
+    'nomLesson',
+    'dateDebLesson',
+    'dateFinLesson',
+    'descriptionLesson',
+    'action',
+  ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  brandNewSpecialite: any;
+  uploadUrl = 'http://localhost:8081/upload-directory/';
+  currentLesson: any | null;
+  eventsList: Event[];
+  filtredEventsList: Event[];
+  searchInput: string = '';
+
+  constructor(
+    private addEventDialog: MatDialog,
+    private activatedRoute: ActivatedRoute,
+    private clubService: ClubService,
+    private eventService: EventService,
+    private updateEventDialog: MatDialog
+  ) {
+    this.eventsList = [];
+  }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-    this.dataSource.paginator = this.paginator;
-  }
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
+    this.refreshEventList();
   }
 
-  openAddUniversityDialog(): void {
-    const dialogRef = this.addUserDialog.open(
-      AddUniversityDialogDashComponent,
-      {
-        width: '550px', // Set the width as per your design
-        // Add any other dialog configuration options here
+  refreshEventList(): void {
+    this.eventService
+      .getEvent(this.activatedRoute.snapshot.params['id'])
+      .subscribe({
+        next: (res) => {
+          console.log('API Response:', res);
+
+          const eventData = res;
+
+          this.currentLesson = eventData;
+          this.getEvents();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
+
+  getVideoUrl(): string {
+    if (this.currentLesson && this.currentLesson.imageLesson) {
+      const videoFileName = this.currentLesson.imageLesson;
+      const idEvent = this.currentLesson.idEvent;
+      return `${this.uploadUrl}/${idEvent}/videos/${videoFileName}`;
+    }
+    return 'path/to/default/video.mp4';
+  }
+  getEvents(): void {
+    this.eventService.getAllEvents().subscribe(
+      (events) => {
+        this.eventsList = events;
+        this.dataSource = new MatTableDataSource(this.eventsList);
+        this.dataSource.paginator = this.paginator;
+      },
+      (error) => {
+        console.error('Error fetching events:', error);
       }
     );
+  }
+
+  openAddEventDialog(): void {
+    const dialogRef = this.addEventDialog.open(AddEventDialogDashComponent, {
+      width: '550px',
+      data: this.currentLesson,
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
-      // Handle the result after the dialog is closed (if needed)
       if (result) {
+        this.refreshEventList();
         console.log('The dialog save pressed', result);
       } else {
         console.log('The dialog was closed', result);
       }
     });
+  }
+
+  onDeleteEvent(id: any): void {
+    this.eventService.deleteEvent(id).subscribe(() => {
+      this.refreshEventList();
+    });
+  }
+
+  openUpdateDialog(eventId: any): void {
+    this.eventService.getEvent(eventId).subscribe(
+      (eventData) => {
+        const dialogRef = this.updateEventDialog.open(
+          UpdateEventDialogDashComponent,
+          {
+            width: '550px',
+            data: eventData,
+          }
+        );
+        dialogRef.afterClosed().subscribe((result) => {
+          this.refreshEventList();
+          console.log('Dialog closed with result:', result);
+        });
+      },
+      (error) => {
+        console.error('Error fetching club data:', error);
+      }
+    );
   }
 }

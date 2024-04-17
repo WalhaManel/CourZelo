@@ -16,6 +16,10 @@ import { AddNewsDialogDashComponent } from './add-news-dialog-dash/add-news-dial
 import { NewsDetailsComponent } from './news-details/news-details.component';
 import { UniversityListComponent } from './university-list/university-list.component';
 import { UniversityDetailComponent } from './university-detail/university-detail.component';
+import { ChatbootComponent } from './chatboot/chatboot.component';
+import { ZoomComponentViewComponent } from './zoom-component-view/zoom-component-view.component';
+import { PubComponent } from './pub/pub.component';
+import { YoutubeComponent } from './youtube/youtube.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +30,10 @@ import { UniversityDetailComponent } from './university-detail/university-detail
     NewsDetailsComponent,
     UniversityListComponent,
     UniversityDetailComponent,
+    ChatbootComponent,
+    ZoomComponentViewComponent,
+    PubComponent,
+    YoutubeComponent,
   ],
   imports: [
     CommonModule,

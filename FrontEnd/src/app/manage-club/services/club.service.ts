@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Club } from '../models/course';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Rating } from '../models/Rating';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClubService {
   private baseUrl = 'http://localhost:8081';
+  private baseUrl1 = 'http://localhost:8081';
 
   constructor(private http: HttpClient) {}
 
@@ -23,7 +26,7 @@ export class ClubService {
     console.log('data');
     console.log(data);
     return this.http.post<Club>(
-      this.baseUrl + '/dashboard/clubs/addClub/' + data.university,
+      this.baseUrl + '/dashboard/clubs/addClub/1/' + data.university,
       data
     );
   }
@@ -57,5 +60,44 @@ export class ClubService {
     const shareFbEndpoint = `${this.baseUrl}/shareFb/${id}`;
 
     return this.http.post<string>(shareFbEndpoint, null);
+  }
+
+  getDefinition(query: string): Observable<string> {
+    const url = `${this.baseUrl1}/azz/${query}`;
+    return this.http.get(url, { responseType: 'text' });
+  }
+
+  searchVideo(query: string): Observable<string> {
+    const apiUrl = `${this.baseUrl1}/api/searchVideo?query=${query}`;
+    return this.http.get<string>(apiUrl);
+  }
+
+  saveRating(
+    userId: string,
+    courseId: number,
+    ratingValue: number
+  ): Observable<any> {
+    const payload = {
+      idUser: userId,
+      ratingValue: ratingValue,
+      course: {
+        idClub: courseId,
+      },
+    };
+
+    return this.http.post<any>(
+      `${this.baseUrl1}/saveRating/${courseId}`,
+      payload
+    );
+  }
+
+  getAverageRatingForClub(idClub: number): Observable<number> {
+    const url = `${this.baseUrl}/clubs/averageRating/${idClub}`;
+    return this.http.get<number>(url);
+  }
+
+  getMonthlyRevenue(userId: number): Observable<number[]> {
+    const url = `${this.baseUrl}/monthlyRevenue/${userId}`;
+    return this.http.get<number[]>(url);
   }
 }

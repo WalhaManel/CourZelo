@@ -129,7 +129,7 @@
                     <div class="table-responsive m-t-16">
                       <table mat-table [dataSource]="dataSource" class="w-100">
                         <!-- nom Column -->
-                        <ng-container matColumnDef="nom">
+                        <ng-container matColumnDef="nomLesson">
                           <th
                             mat-header-cell
                             *matHeaderCellDef
@@ -142,14 +142,15 @@
                               class="d-flex align-items-center justify-content-start"
                             >
                               <div class="tableImage__container">
-                                <img
+                                <video
                                   [src]="uploadUrl + element.imageLesson"
-                                  alt="users"
                                   width="40"
                                   style="border-radius: 0.6rem"
-                                  class="tableImage"
-                                />
+                                  class="tableVideo"
+                                  controls
+                                ></video>
                               </div>
+
                               <div class="">
                                 <h6 class="mat-subtitle-1 f-s-14 f-w-600">
                                   {{ element.nomLesson }}
@@ -163,7 +164,7 @@
                         </ng-container>
 
                         <!-- dateDeb Column -->
-                        <ng-container matColumnDef="dateDeb">
+                        <ng-container matColumnDef="dateDebLesson">
                           <th
                             mat-header-cell
                             *matHeaderCellDef
@@ -181,7 +182,7 @@
                         </ng-container>
 
                         <!-- dateFin Column -->
-                        <ng-container matColumnDef="dateFin">
+                        <ng-container matColumnDef="dateFinLesson">
                           <th
                             mat-header-cell
                             *matHeaderCellDef
@@ -199,7 +200,7 @@
                         </ng-container>
 
                         <!-- description Column -->
-                        <ng-container matColumnDef="description">
+                        <ng-container matColumnDef="descriptionLesson">
                           <th
                             mat-header-cell
                             *matHeaderCellDef

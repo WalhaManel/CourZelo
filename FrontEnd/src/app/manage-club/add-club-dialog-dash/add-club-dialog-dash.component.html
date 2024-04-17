@@ -1,27 +1,23 @@
 <h1 mat-dialog-title style="margin-bottom: 1rem">Add Course</h1>
-<!-- <div class="section__title-wrapper">
+<div class="section__title-wrapper">
   <h2 mat-dialog-title class="section__title">
     Get in<span class="yellow-bg yellow-bg-big"
       >touch<img src="./assets/images/shape/yellow-bg.png" alt=""
     /></span>
   </h2>
-</div> -->
+</div>
+
 <div mat-dialog-content>
-  <!-- Your form or content for adding a user goes here -->
   <div class="contact__form">
     <form #f="ngForm" (ngSubmit)="submitForm(f.value)">
       <div class="row">
         <div class="col-12 m-b-30">
-          <div class="contact__form-input__video__container">
-            <video
-              class="contact__form-input__video"
-              controls
+          <div class="contact__form-input__image__container">
+            <img
+              class="contact__form-input__image"
               [src]="imageUrl"
-              type="video/*"
-              alt="Video Preview"
-            >
-              Your browser does not support the video tag.
-            </video>
+              alt="Image Preview"
+            />
           </div>
 
           <div class="contact__form-input contact__form-input__image__btns">
@@ -93,6 +89,28 @@
           </div>
         </div>
 
+        <div class="col-12">
+          <div class="contact__form-input">
+            <label class="contact__form-input-label" for="prix">Prix</label>
+            <input
+              #prixField="ngModel"
+              type="number"
+              placeholder="Prix"
+              id="prix"
+              name="prix"
+              ngModel
+              required
+              [ngClass]="{ inputError: prixField.invalid && prixField.touched }"
+            />
+            <div
+              *ngIf="prixField.invalid && prixField.touched"
+              class="error-message"
+            >
+              Prix invalide
+            </div>
+          </div>
+        </div>
+
         <div class="col-12" style="margin-bottom: 8px">
           <div
             class="contact__form-input"
@@ -160,6 +178,3 @@
     </form>
   </div>
 </div>
-<!-- <div mat-dialog-actions>
-  <button mat-flat-button color="primary" (click)="closeDialog()"></button>
-</div> -->

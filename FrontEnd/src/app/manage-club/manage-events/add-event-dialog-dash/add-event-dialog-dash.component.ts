@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EventService } from 'app/manage-club/services/event.service';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { Event } from 'app/manage-club/models/Lesson';
+import { Event } from 'app/manage-club/models/event';
 import { Subject, merge, take } from 'rxjs';
 import { Club } from 'app/manage-club/models/course';
 

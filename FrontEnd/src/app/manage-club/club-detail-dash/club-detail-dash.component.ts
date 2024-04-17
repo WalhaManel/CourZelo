@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Club } from '../models/course';
-import { Event } from '../models/Lesson';
+import { Event } from '../models/event';
 import { ActivatedRoute } from '@angular/router';
 import { ClubService } from '../services/club.service';
 import { AddEventDialogDashComponent } from '../manage-events/add-event-dialog-dash/add-event-dialog-dash.component';
@@ -18,10 +18,10 @@ import { UpdateEventDialogDashComponent } from '../manage-events/update-event-di
 export class ClubDetailDashComponent {
   dataSource: any;
   displayedColumns: string[] = [
-    'nom',
-    'dateDeb',
-    'dateFin',
-    'description',
+    'nomLesson',
+    'dateDebLesson',
+    'dateFinLesson',
+    'descriptionLesson',
     'action',
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -51,28 +51,45 @@ export class ClubDetailDashComponent {
       .getClub(this.activatedRoute.snapshot.params['id'])
       .subscribe({
         next: (res) => {
+          console.log('API Response:', res);
+
           this.currentClub = res;
-          this.handleEvenementsProperty(res.evenements);
-          console.error('res.evenements');
-          console.error(res.evenements);
-          console.error('res.evenements');
+
+          // Check if there is a property that contains events data and it is an array
+          if (res.evenements && Array.isArray(res.evenements)) {
+            this.eventsList = [...res.evenements];
+            console.log(this.eventsList);
+          } else {
+            console.warn(
+              "No or invalid 'evenements' property in the response. Setting eventsList to an empty array."
+            );
+            // Set a default value for this.eventsList or handle the absence of events data
+            this.eventsList = [];
+          }
+
+          this.dataSource = new MatTableDataSource(this.eventsList);
+          this.dataSource.paginator = this.paginator;
+
+          // Make a separate call to get events if available at a different endpoint
+          this.getEvents();
         },
-        error: (err) => {},
+        error: (err) => {
+          console.log(err);
+        },
       });
   }
 
-  private handleEvenementsProperty(evenements: Event[] | undefined): void {
-    if (evenements && Array.isArray(evenements)) {
-      this.eventsList = [...evenements];
-    } else {
-      console.error(
-        'Invalid or missing "evenements" property in the server response.'
-      );
-      this.eventsList = [];
-    }
-
-    this.dataSource = new MatTableDataSource<Event>(this.eventsList);
-    this.dataSource.paginator = this.paginator;
+  getEvents(): void {
+    this.eventService.getAllEvents().subscribe(
+      (events) => {
+        this.eventsList = events;
+        this.dataSource = new MatTableDataSource(this.eventsList);
+        this.dataSource.paginator = this.paginator;
+      },
+      (error) => {
+        console.error('Error fetching events:', error);
+      }
+    );
   }
 
   openAddEventDialog(): void {

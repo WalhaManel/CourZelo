@@ -6,17 +6,19 @@
     <form #f="ngForm" (ngSubmit)="submitForm(f.value)">
       <div class="row">
         <div class="col-12 m-b-30">
-          <div class="contact__form-input__image__container">
-            <img
-              class="contact__form-input__image"
-              [src]="imageUrl"
-              alt="Image Preview"
-            />
-          </div>
+          <video
+            class="contact__form-input__video"
+            controls
+            [src]="imageUrl"
+            type="video/*"
+            alt="Video Preview"
+          >
+            Your browser does not support the video tag.
+          </video>
           <div class="contact__form-input contact__form-input__image__btns">
             <input
               type="file"
-              accept="image/*"
+              accept="Video/*"
               id="Image"
               name="imageLesson"
               ngModel
@@ -106,7 +108,7 @@
             <div style="display: flex">
               <input
                 type="text"
-                placeholder="YYYY-MM-DD"
+                placeholder="yyyy-MM-dd HH:mm:ss"
                 id="dateDebLesson"
                 name="dateDebLesson"
                 matInput
@@ -129,7 +131,7 @@
             <div style="display: flex">
               <input
                 type="text"
-                placeholder="YYYY-MM-DD"
+                placeholder="yyyy-MM-dd HH:mm:ss"
                 id="dateFinLesson"
                 name="dateFinLesson"
                 matInput

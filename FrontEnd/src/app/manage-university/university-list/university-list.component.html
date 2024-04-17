@@ -96,8 +96,11 @@
                   >
                     <div class="course__item white-bg mb-30 fix">
                       <div class="course__thumb w-img p-relative fix">
-                        <a href="course-details.html">
+                        <a [routerLink]="'Detail/' + element.idCourse">
+                          <!-- Le reste de votre contenu ici -->
+
                           <img
+                            class="image-fixe"
                             [src]="
                               'http://localhost:8081/upload-directory/' +
                               element.imgUrl
@@ -120,7 +123,11 @@
                             >
                           </div>
                           <div class="course__rating">
-                            <span><i class="icon_star"></i>4.5 (44)</span>
+                            <span
+                              ><i class="icon_star"></i>
+                              {{ element.averageRating }}
+                              (44)
+                            </span>
                           </div>
                         </div>
                         <h3 class="course__title">
@@ -162,6 +169,10 @@
                     </div>
                   </div>
                 </div>
+                <mat-paginator
+                  [pageSizeOptions]="[5, 10, 20]"
+                  showFirstLastButtons
+                ></mat-paginator>
               </div>
               <div
                 class="tab-pane fade"
@@ -715,59 +726,17 @@
                   <li>
                     <div
                       class="course__sidebar-check mb-10 d-flex align-items-center"
-                    >
-                      <input class="m-check-input" type="checkbox" id="m-eng" />
-                      <label class="m-check-label" for="m-eng"
-                        >English (6)</label
-                      >
-                    </div>
-                  </li>
-                  <li>
-                    <div
-                      class="course__sidebar-check mb-10 d-flex align-items-center"
-                    >
-                      <input class="m-check-input" type="checkbox" id="m-edu" />
-                      <label class="m-check-label" for="m-edu"
-                        >Education (8)</label
-                      >
-                    </div>
-                  </li>
-                  <li>
-                    <div
-                      class="course__sidebar-check mb-10 d-flex align-items-center"
-                    >
-                      <input class="m-check-input" type="checkbox" id="m-bus" />
-                      <label class="m-check-label" for="m-bus"
-                        >Business (5)</label
-                      >
-                    </div>
-                  </li>
-                  <li>
-                    <div
-                      class="course__sidebar-check mb-10 d-flex align-items-center"
+                      *ngFor="let element of dataSource.data"
                     >
                       <input
                         class="m-check-input"
                         type="checkbox"
-                        id="m-design"
+                        id="m-eng"
+                        (change)="onCategoryChange()"
                       />
-                      <label class="m-check-label" for="m-design"
-                        >UX Design (3)</label
-                      >
-                    </div>
-                  </li>
-                  <li>
-                    <div
-                      class="course__sidebar-check mb-10 d-flex align-items-center"
-                    >
-                      <input
-                        class="m-check-input"
-                        type="checkbox"
-                        id="m-math"
-                      />
-                      <label class="m-check-label" for="m-math"
-                        >Mathematics (3)</label
-                      >
+                      <label class="m-check-label" for="m-eng">{{
+                        element.specialite
+                      }}</label>
                     </div>
                   </li>
                 </ul>
@@ -1077,5 +1046,6 @@
       </div>
     </div>
   </section>
+  <app-chatboot></app-chatboot>
   <!-- cta area end -->
 </main>

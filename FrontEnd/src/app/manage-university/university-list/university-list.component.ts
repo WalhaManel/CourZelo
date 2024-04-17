@@ -39,6 +39,26 @@ export class UniversityListComponent implements OnInit, AfterViewInit {
       (clubs) => {
         this.dataSource.data = clubs;
         this.dataSource.paginator = this.paginator;
+
+        clubs.forEach((club) => {
+          // Vérifier si club.idCourse est non null avant d'appeler getAverageRatingForClub
+          if (club.idCourse !== null) {
+            this.clubService.getAverageRatingForClub(club.idCourse).subscribe(
+              (averageRating) => {
+                club.averageRating = averageRating;
+              },
+              (error) => {
+                console.error(
+                  "Une erreur s'est produite lors de la récupération de la moyenne des évaluations :",
+                  error
+                );
+              }
+            );
+          } else {
+            // Gérer le cas où club.idCourse est null (par exemple, affecter une valeur par défaut)
+            club.averageRating = 0; // Ou toute autre valeur par défaut
+          }
+        });
       },
       (error) => {
         console.error(
@@ -77,5 +97,31 @@ export class UniversityListComponent implements OnInit, AfterViewInit {
 
     this.dataSource = new MatTableDataSource(this.filtredClubsList);
     this.dataSource.paginator = this.paginator;
+  }
+
+  onCategoryChange(): void {
+    const checkboxes: NodeListOf<HTMLInputElement> =
+      document.querySelectorAll('.m-check-input');
+
+    checkboxes.forEach((checkbox) => {
+      checkbox.addEventListener('change', () => {
+        const selectedCategories: string[] = [];
+
+        checkboxes.forEach((checkbox) => {
+          if (checkbox.checked) {
+            selectedCategories.push(checkbox.id);
+          }
+        });
+
+        this.filtredClubsList = this.dataSource.data.filter((club) =>
+          selectedCategories.some((specialite) =>
+            club.specialite.includes(specialite)
+          )
+        );
+
+        this.dataSource = new MatTableDataSource(this.filtredClubsList);
+        this.dataSource.paginator = this.paginator;
+      });
+    });
   }
 }

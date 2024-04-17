@@ -103,18 +103,24 @@ export class ClubListDashComponent implements AfterViewInit {
     );
   }
 
-  onSearchChange(searchInput: string) {
-    if (!searchInput) {
+  onSearchChange(searchInput: string): void {
+    if (!searchInput.trim()) {
+      // Si la saisie est vide, rafraîchir la liste complète
       this.refreshClubList();
       return;
     }
 
+    const searchTerm = searchInput.toLowerCase().trim();
+
+    // Filtrer les données en fonction de la recherche
     this.filtredClubsList = this.dataSource.data.filter(
-      (spec) =>
-        spec.courseTitle.toLowerCase().includes(searchInput) ||
-        spec.courseDescription.toLowerCase().includes(searchInput) ||
-        spec.specialite.nomUniversite.toLowerCase().includes(searchInput)
+      (club) =>
+        club.courseTitle.toLowerCase().includes(searchTerm) ||
+        club.courseDescription.toLowerCase().includes(searchTerm) ||
+        club.specialite.nomUniversite.toLowerCase().includes(searchTerm)
     );
+
+    // Réaffecter les données filtrées au MatTableDataSource
     this.dataSource = new MatTableDataSource(this.filtredClubsList);
     this.dataSource.paginator = this.paginator;
   }

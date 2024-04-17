@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -30,6 +30,14 @@ import { PreLoaderComponent } from './layouts/front/pre-loader/pre-loader.compon
 import { BackToTopComponent } from './layouts/front/back-to-top/back-to-top.component';
 import { NavbarComponent } from './layouts/front/navbar/navbar.component';
 import { FooterComponent } from './layouts/front/footer/footer.component';
+import { ChatbotComponent } from './manage-club/chatbot/chatbot.component';
+
+import { BasketComponent } from './basket/basket.component';
+import { AddBasketComponent } from './add-basket/add-basket.component';
+import { ListPurchasesComponent } from './list-purchases/list-purchases.component';
+import { ShowPurchasesComponent } from './show-purchases/show-purchases.component';
+import { PopupComponent } from './popup/popup.component';
+import { NgxWebrtcModule } from 'ngx-webrtc';
 
 @NgModule({
   declarations: [
@@ -45,6 +53,11 @@ import { FooterComponent } from './layouts/front/footer/footer.component';
     NavbarComponent,
     FooterComponent,
     FrontComponent,
+    BasketComponent,
+    AddBasketComponent,
+    ListPurchasesComponent,
+    ShowPurchasesComponent,
+    PopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,8 +70,10 @@ import { FooterComponent } from './layouts/front/footer/footer.component';
     TablerIconsModule.pick(TablerIcons),
     UniversityModule,
     ClubModule,
+    NgxWebrtcModule,
   ],
   exports: [TablerIconsModule],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

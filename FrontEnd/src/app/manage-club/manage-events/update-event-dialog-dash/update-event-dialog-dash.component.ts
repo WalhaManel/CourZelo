@@ -1,6 +1,6 @@
 import { Component, Inject, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Event } from 'app/manage-club/models/Lesson';
+import { Event } from 'app/manage-club/models/event';
 import { EventService } from 'app/manage-club/services/event.service';
 import { Subject } from 'rxjs';
 

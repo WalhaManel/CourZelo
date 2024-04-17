@@ -6,12 +6,16 @@
     <form #updateForm="ngForm" (ngSubmit)="submitForm(updateForm)">
       <div class="row">
         <div class="col-12 m-b-30">
-          <div class="contact__form-input__image__container">
-            <img
-              class="contact__form-input__image"
+          <div class="contact__form-input__video__container">
+            <video
+              class="contact__form-input__video"
+              controls
               [src]="imageUrl"
-              alt="Image Preview"
-            />
+              type="video/*"
+              alt="Video Preview"
+            >
+              Your browser does not support the video tag.
+            </video>
           </div>
           <div class="contact__form-input contact__form-input__image__btns">
             <input

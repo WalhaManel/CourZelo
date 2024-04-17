@@ -6,7 +6,7 @@ import { AppSideRegisterComponent } from './authentication/register/register.com
 
 export const PagesRoutes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: AppDashboardComponent,
     data: {
       title: 'Starter Page',

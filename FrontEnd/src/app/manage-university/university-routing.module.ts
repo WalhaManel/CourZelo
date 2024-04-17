@@ -5,10 +5,11 @@ import { UniversityDetailDashComponent } from './university-detail-dash/universi
 import { NewsDetailsComponent } from './news-details/news-details.component';
 import { UniversityListComponent } from './university-list/university-list.component';
 import { UniversityDetailComponent } from './university-detail/university-detail.component';
+import { ZoomComponentViewComponent } from './zoom-component-view/zoom-component-view.component';
 
 const routes: Routes = [
   {
-    path: 'admin',
+    path: 'lesson',
     children: [
       {
         path: '',
@@ -16,7 +17,7 @@ const routes: Routes = [
       },
       {
         path: ':id',
-        component: UniversityDetailDashComponent,
+        component: UniversityListDashComponent,
       },
     ],
   },
@@ -25,7 +26,11 @@ const routes: Routes = [
     component: UniversityListComponent,
   },
   {
-    path: ':id',
+    path: 'zoom/:var',
+    component: ZoomComponentViewComponent,
+  },
+  {
+    path: 'Detail/:id',
     component: UniversityDetailComponent,
   },
   {
